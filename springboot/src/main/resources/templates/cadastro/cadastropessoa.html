@@ -2,7 +2,7 @@
 <html xmlns="https://www.w3.org/199/xhtml" 
 	  xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 
 
@@ -35,8 +35,23 @@
 	
 	<a class="waves-effect waves-light btn" href="listapessoas">Listar pessoas</a>
 </form>
+<br/>
+<br/>
+
+<form action="pesquisarpessoa" method="post">
+	<div class="row">
+        <div class="input-field col s12">
+          <input id="nomepesquisa" type="text" class="validate" name="nomepesquisa" style="width: 200px;">
+          <label for="nomepesquisa">Pesquisa por nome</label>
+          </div>
+			<input class="waves-effect waves-light btn" type="submit" value="Buscar">
+          </div>
 
 
+</form>
+
+<br/>
+<br/>
 <table class="highlight">
 	<tr th:each = "pessoa : ${pessoas}">
 	 <td th:text = "${pessoa.id}"/>
