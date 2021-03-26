@@ -1,34 +1,93 @@
 <!DOCTYPE html>
-<html xmlns="https://www.w3.org/199/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="https://www.w3.org/199/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Telefones</title>
 
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
-<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.css" media="screen,projection" />
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.min.css" media="screen,projection" />
 
 </head>
 <body>
-<div class="container">
-<h3 style="margin-left: auto; margin-right: auto;">Cadastro Telefones</h3>
-<a class="waves-effect waves-light btn" href="/cadastropessoa">Cadastro de Pessoas</a>
+	<div class="container">
+			<h3 style="margin-left: auto; margin-right: auto;">Cadastro
+				Telefones</h3>
+			<a class="waves-effect waves-light btn" href="/cadastropessoa">Cadastro
+				de Pessoas</a>
+		 <br />
+		
+		<div th:each="m : ${msg}">
+			<span th:text="${m}"></span>
+		</div>
+		
+		<br />
 
-<div th:each="p: ${pessoaobj}">
-	<div class="row">
-		<p>ID: <span th:text="${p.id}"></span></p>
-		<p>NOME: <span th:text="${p.nome}"></span></p>
-		<p>SOBRENOME: <span th:text="${p.sobrenome}"></span></p>
-		<p>IDADE: <span th:text="${p.idade}"></span></p>
-	
+		<div th:each="p: ${pessoaobj}">
+
+			<div class="row">
+				<div class="input-field col s8">
+					<input id="id" type="text"
+						class="validate" disabled><label for="disabled">ID: <span th:text="${p.id}"></span></label>
+				</div>
+				<div class="input-field col s8">
+					<input id="nome" type="text"
+						class="validate" disabled><label for="disabled">NOME: <span th:text="${p.nome}"></span></label>
+				</div>
+
+				<div class="input-field col s8">
+					<input id="sobrenome" type="text"
+						class="validate" disabled><label for="disabled">SOBRENOME: <span th:text="${p.sobrenome}"></span></label>
+				</div>
+			</div>
+
+
+			</div>
+
+			<h5>Telefones</h5>
+			<div class="row">
+				<form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class="col s12">
+					<div class="row">
+						<div class="input-field col s6">
+							<input id="numero" type="text" class="validate" name="numero">
+							<label class="active" for="numero">Número</label>
+						</div>
+							<div class="input-field col s6">
+								<input id="tipo" type="text" class="validate" name="tipo">
+								<label class="active" for="tipo">Tipo</label>
+							</div>
+						<button class="waves-effect waves-light btn" type="submit">Adicionar</button>
+					</div>
+				</form>
+			</div>
+			
+			<table class="highlight">
+		<thead>
+		<tr>
+			<th>ID</th>
+			<th>Número</th>
+			<th>Tipo</th>
+			<!-- <th>Editar</th>
+			<th>Excluir</th> -->
+		</tr>
+		</thead>
+
+			<tr th:each="fone : ${telefones}">
+				<td th:text="${fone.id}"/>
+				<td	th:text="${fone.numero}"/>
+				<td th:text="${fone.tipo}"/>
+				<td><a th:href="@{/removertelefone/{idtelefone}(idtelefone=${fone.id})}">Excluir</a></td> 
+				<!-- <td><a th:href="@{/editartelefone/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>-->
+			</tr>
+		</table>
+			
 	</div>
-
-</div>
-
-</div>
-<script type="text/javascript" src="/materialize/js/materialize.js"></script>
-<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="/materialize/js/materialize.js"></script>
+	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
 </body>
 </html>

@@ -12,9 +12,13 @@
 
 </head>
 <body>
-<div class="container">
+<div class="container" style="background-color: #b2ebf2">
 <h3 style="margin-left: auto; margin-right: auto;">Cadastro Pessoa</h3>
-
+<br/>
+<div th:each = "m : ${msg}">
+	<span th:text = "${m}"></span>
+</div>
+<br/>
 <form id="formpessoa" action="salvarpessoa" method="post" th:object="${pessoaobj}" class="col s12">
 	<div class="row">
 			<label style="display: none;">ID</label> <input name="id"
