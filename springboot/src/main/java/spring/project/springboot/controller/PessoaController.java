@@ -137,7 +137,28 @@ public class PessoaController implements Serializable{
 		
 		Pessoa pessoa = pessoaRepository.findById(pessoaid).get();
 		
-		
+		if(telefone != null && telefone.getNumero().isEmpty() || telefone.getTipo().isEmpty()) {
+			
+			ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+			modelAndView.addObject("pessoaobj", pessoa);
+			modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
+			
+			List<String> msg = new ArrayList<String>();
+			
+			if(telefone.getNumero().isEmpty()) {
+			
+				msg.add("Número deve ser informado");
+
+			}
+			
+			if(telefone.getTipo().isEmpty()) {
+				msg.add("Tipo deve ser informado");
+			}
+			
+			modelAndView.addObject("msg", msg);
+			return modelAndView;
+			
+		}
 		
 		telefone.setPessoa(pessoa);
 		telefoneRepository.save(telefone);
